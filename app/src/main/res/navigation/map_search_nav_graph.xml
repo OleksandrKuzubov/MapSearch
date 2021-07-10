@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tomtom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/map_search_nav_graph"
+    app:startDestination="@id/mapFragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.kutuzov.mapsearch.ui.main.MainFragment"
+        android:label="MapFragment">
+<!--        <action-->
+<!--            android:id="@+id/action_newsFragment_to_detailsCarouselFragment"-->
+<!--            app:destination="@id/detailsCarouselFragment"-->
+<!--            app:enterAnim="@anim/slide_in_to_right"-->
+<!--            app:exitAnim="@anim/slide_out_to_left"-->
+<!--            app:popEnterAnim="@anim/slide_in_to_left"-->
+<!--            app:popExitAnim="@anim/slide_out_to_right" />-->
+    </fragment>
+
+<!--    <fragment-->
+<!--        android:id="@+id/detailsCarouselFragment"-->
+<!--        android:name="nl.tmg.presentation.ui.details.DetailsCarouselFragment"-->
+<!--        android:label="DetailsCarouselFragment">-->
+
+<!--        <argument-->
+<!--            android:name="position"-->
+<!--            android:defaultValue="0"-->
+<!--            app:argType="integer" />-->
+<!--    </fragment>-->
+
+</navigation>
