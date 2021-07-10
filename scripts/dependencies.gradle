@@ -1,0 +1,166 @@
+ext {
+    versions = [
+            minSdkVersion             : 21,
+            compileSdkVersion         : 30,
+            targetSdkVersion          : 30,
+            androidXTestVersion       : "1.2.0",
+            appCompatVersion          : "1.2.0-alpha03",
+            archTestingVersion        : "2.1.0",
+            benchmarkVersion          : "1.0.0",
+            buildToolsVersion         : "28.0.3",
+            constraintLayoutVesion    : "2.0.0-beta4",
+            fragmentTestingVersion    : "1.2.2",
+            fragmentVersion           : "1.3.0-alpha02",
+            findBugsVersion           : "3.0.1",
+            gsonVersion               : "2.8.6",
+            idlingResourceVersion     : "3.2.0",
+            jetpackAdsVersion         : "1.0.0-alpha04",
+            junitExtVersion           : "1.1.1",
+            lifecycleVersion          : "2.2.0",
+            navigationVersion         : "2.3.0",
+            cardViewVersion           : "1.0.0",
+            recyclerViewVersion       : "1.1.0-alpha06",
+            pagingVersion             : "2.1.0",
+            viewPagerVersion          : "1.0.0-alpha05",
+            collectionVersion         : "1.1.0",
+            daggerVersion             : "2.27",
+            okHttpVersion             : "3.14.2",
+            retrofitVersion           : "2.5.0",
+            moshiVersion              : "1.9.2",
+            mockedPrefsVersion        : "1.0",
+            coroutinesVersion         : "1.3.9",
+            leakCanaryVersion         : "2.0-alpha-3",
+            timberVersion             : "4.7.1",
+            jUnitVersion              : "5.4.0",
+            espressoVersion           : "3.2.0",
+            mockkVersion              : "1.9.3",
+            picasso                   : "2.71828",
+            multidex                  : "2.0.1",
+            materialVersion           : "1.2.0-alpha05",
+            swipeRefreshVersion       : "1.1.0-alpha03",
+            viewpager2Version         : "1.0.0",
+            jUnitCompanionVersion     : "1.2.0",
+            sharedSdkVersion          : "2.0.23",
+            gemiusSdkVersion          : "1.9.0",
+            tealiumSdkVersion         : "5.7.2",
+            googleChromeTabsVersion   : "1.2.0",
+            mockitoVersion            : "3.8.0",
+            sharedPrefsVersion        : "1.1.1",
+            tomtomSdkVersion          : "2.4807"
+    ]
+
+    libraries = [
+
+            androidx  : [
+                    sharedPreferences: "androidx.preference:preference:${versions.sharedPrefsVersion}",
+                    appCompat        : "androidx.appcompat:appcompat:${versions.appCompatVersion}",
+                    recyclerView     : "androidx.recyclerview:recyclerview:${versions.recyclerViewVersion}",
+                    cardView         : "androidx.cardview:cardview:${versions.cardViewVersion}",
+                    chromeTabs       : "androidx.browser:browser:${versions.googleChromeTabsVersion}",
+                    constraintLayout : "androidx.constraintlayout:constraintlayout:${versions.constraintLayoutVesion}",
+                    multidex         : "androidx.multidex:multidex:${versions.multidex}",
+                    lifecycle        : "androidx.lifecycle:lifecycle-extensions:${versions.lifecycleVersion}",
+                    fragment         : "androidx.fragment:fragment-ktx:${versions.fragmentVersion}",
+                    viewmodel        : "androidx.lifecycle.lifecycle-viewmodel:${versions.lifecycleVersion}",
+                    viewmodelExt     : "androidx.lifecycle.lifecycle-viewmodel-ktx:${versions.lifecycleVersion}",
+                    liveData         : "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycleVersion}",
+                    liveDataCore     : "androidx.lifecycle:lifecycle-livedata-core-ktx:${versions.lifecycleVersion}",
+                    runtime          : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycleVersion}",
+                    process          : "androidx.lifecycle:lifecycle-process:${versions.lifecycleVersion}",
+                    paging           : "androidx.paging:paging-runtime-ktx:${versions.pagingVersion}",
+                    collection       : "androidx.collection:collection:${versions.collectionVersion}",
+                    viewPager2       : "androidx.viewpager2:viewpager2:${versions.viewpager2Version}",
+                    swipeRefresh     : "androidx.swiperefreshlayout:swiperefreshlayout:${versions.swipeRefreshVersion}",
+                    navigationCore   : "androidx.navigation:navigation-fragment-ktx:${versions.navigationVersion}",
+                    navigationUIExt  : "androidx.navigation:navigation-ui-ktx:${versions.navigationVersion}"
+            ],
+
+
+            coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutinesVersion}",
+
+            dagger    : [
+                    core               : "com.google.dagger:dagger:${versions.daggerVersion}",
+                    android            : "com.google.dagger:dagger-android:${versions.daggerVersion}",
+                    support            : "com.google.dagger:dagger-android-support:${versions.daggerVersion}",
+                    compiler           : "com.google.dagger:dagger-compiler:${versions.daggerVersion}",
+                    annotationProcessor: "com.google.dagger:dagger-android-processor:${versions.daggerVersion}"
+            ],
+
+            kotlin    : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
+
+            leakCanary: "com.squareup.leakcanary:leakcanary-android:${versions.leakCanaryVersion}",
+
+            moshi     : [
+                    core   : "com.squareup.moshi:moshi:${versions.moshiVersion}",
+                    kotlin : "com.squareup.moshi:moshi-kotlin:${versions.moshiVersion}",
+                    codeGen: "com.squareup.moshi:moshi-kotlin-codegen:${versions.moshiVersion}",
+            ],
+
+            google    : [
+                    material: "com.google.android.material:material:${versions.materialVersion}",
+                    gson    : "com.google.code.gson:gson:${versions.gsonVersion}",
+            ],
+
+            okHttp    : [
+                    core              : "com.squareup.okhttp3:okhttp:${versions.okHttpVersion}",
+                    loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${versions.okHttpVersion}"
+            ],
+
+            picasso   : "com.squareup.picasso:picasso:${versions.picasso}",
+
+            retrofit  : [
+                    core          : "com.squareup.retrofit2:retrofit:${versions.retrofitVersion}",
+                    moshiConverter: "com.squareup.retrofit2:converter-moshi:${versions.retrofitVersion}"
+            ],
+
+            timber    : "com.jakewharton.timber:timber:${versions.timberVersion}",
+
+            tomtom    : "com.tomtom.online:sdk-maps:${versions.tomtomSdkVersion}"
+    ]
+
+    testLibraries = [
+            androidx               : [
+                    fragmentTesting  : "androidx.fragment:fragment-testing:${versions.fragmentTestingVersion}",
+                    testCore         : "androidx.test:core:${versions.androidXTestVersion}",
+                    testRunner       : "androidx.test:runner:${versions.androidXTestVersion}",
+                    testRules        : "androidx.test:rules:${versions.androidXTestVersion}",
+                    junitExt         : "androidx.test.ext:junit:${versions.junitExtVersion}",
+                    benchmark        : "androidx.benchmark:benchmark-junit4:${versions.benchmarkVersion}",
+                    idlingResource   : "androidx.test.espresso:espresso-idling-resource:${versions.idlingResourceVersion}",
+                    idlingRConcurent : "androidx.test.espresso.idling:idling-concurrent:${versions.idlingResourceVersion}",
+                    espresso         : "androidx.test.espresso:espresso-core:${versions.espressoVersion}",
+                    espressoContrib  : "androidx.test.espresso:espresso-contrib:${versions.espressoVersion}",
+                    navigationTesting: "androidx.navigation:navigation-testing:${versions.navigationVersion}",
+                    archTesting      : "androidx.arch.core:core-testing:${versions.archTestingVersion}"
+            ],
+
+            coroutinesCore         : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutinesVersion}",
+
+            coroutinesTest         : "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutinesVersion}",
+
+            google                 : [
+                    findBugs: "com.google.code.findbugs:jsr305:${versions.findBugsVersion}"
+            ],
+
+            junit                  : [
+                    api   : "org.junit.jupiter:junit-jupiter-api:${versions.jUnitVersion}",
+                    engine: "org.junit.jupiter:junit-jupiter-engine:${versions.jUnitVersion}",
+            ],
+
+            junitCompanion         : [
+                    core  : "de.mannodermaus.junit5:android-test-core:${versions.jUnitCompanionVersion}",
+                    runner: "de.mannodermaus.junit5:android-test-runner:${versions.jUnitCompanionVersion}",
+            ],
+
+            mockedPrefs            : "com.github.IvanShafran:shared-preferences-mock:${versions.mockedPrefsVersion}",
+
+            mockito                : [
+                    core: "org.mockito:mockito-core:${versions.mockitoVersion}"
+            ],
+
+            mockk                  : [
+                    core   : "io.mockk:mockk:${versions.mockkVersion}",
+                    android: "io.mockk:mockk-android:${versions.mockkVersion}",
+            ],
+    ]
+}

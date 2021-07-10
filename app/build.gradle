@@ -15,6 +15,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -30,18 +32,38 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    splits {
+        abi {
+            enable true
+        }
+    }
 }
 
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation libraries.picasso
+    implementation libraries.tomtom
+    implementation libraries.kotlin
+    implementation libraries.google.material
+
+    implementation libraries.androidx.process
+    implementation libraries.androidx.fragment
+    implementation libraries.androidx.navigationCore
+    implementation libraries.androidx.navigationUIExt
+    implementation libraries.androidx.constraintLayout
+    implementation libraries.androidx.recyclerView
+    implementation libraries.androidx.paging
+    implementation libraries.androidx.multidex
+
+    debugImplementation libraries.leakCanary
+    testImplementation testLibraries.mockedPrefs
+    androidTestImplementation testLibraries.mockedPrefs
+
+    testImplementation testLibraries.coroutinesCore
+    testImplementation testLibraries.coroutinesTest
+    testImplementation testLibraries.androidx.archTesting
+
+    compileOnly libraries.androidx.paging
+    compileOnly libraries.moshi.core
 }
