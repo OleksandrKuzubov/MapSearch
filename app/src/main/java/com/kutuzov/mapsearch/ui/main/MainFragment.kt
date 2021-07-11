@@ -1,15 +1,16 @@
 package com.kutuzov.mapsearch.ui.main
 
 import android.location.Location
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.kutuzov.mapsearch.BuildConfig
 import com.kutuzov.mapsearch.R
 import com.tomtom.online.sdk.location.LocationUpdateListener
 import com.tomtom.online.sdk.map.*
+
 
 class MainFragment : Fragment(), OnMapReadyCallback, LocationUpdateListener {
 
@@ -21,6 +22,7 @@ class MainFragment : Fragment(), OnMapReadyCallback, LocationUpdateListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
@@ -36,7 +38,7 @@ class MainFragment : Fragment(), OnMapReadyCallback, LocationUpdateListener {
 
     private fun initMap(savedInstanceState: Bundle?) {
         val keysMap = mapOf(
-            ApiKeyType.MAPS_API_KEY to "MAhsJKGvYXB3Org5v3Z2JOJlg6lP47cZ"
+            ApiKeyType.MAPS_API_KEY to BuildConfig.API_KEY
         )
 
         val properties = MapProperties.Builder()
@@ -102,5 +104,26 @@ class MainFragment : Fragment(), OnMapReadyCallback, LocationUpdateListener {
             tomtomMap.centerOnMyLocationWithNorthUp()
             tomtomMap.removeLocationUpdateListener(this)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.map_fragment_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.map_fragment_search -> {
+                toSearchScreen()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    fun toSearchScreen() {
+        findNavController().navigate(
+            MainFragmentDirections.actionMapFragmentToSearchFragment()
+        )
     }
 }
