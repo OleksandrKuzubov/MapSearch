@@ -14,10 +14,6 @@ import com.tomtom.online.sdk.map.*
 
 class MainFragment : Fragment(), OnMapReadyCallback, LocationUpdateListener {
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private val viewModel: MainViewModel by navGraphViewModels(R.id.map_search_nav_graph)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -116,6 +112,10 @@ class MainFragment : Fragment(), OnMapReadyCallback, LocationUpdateListener {
                 toSearchScreen()
                 true
             }
+            R.id.map_fragment_favorites -> {
+                toFavoritesScreen()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -123,6 +123,12 @@ class MainFragment : Fragment(), OnMapReadyCallback, LocationUpdateListener {
     private fun toSearchScreen() {
         findNavController().navigate(
             MainFragmentDirections.actionMapFragmentToSearchFragment()
+        )
+    }
+
+    private fun toFavoritesScreen() {
+        findNavController().navigate(
+            MainFragmentDirections.actionMapFragmentToFavorites()
         )
     }
 }
