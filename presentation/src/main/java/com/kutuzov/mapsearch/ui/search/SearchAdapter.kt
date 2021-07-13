@@ -12,7 +12,12 @@ import kotlinx.android.synthetic.main.search_item_layout.view.*
 private val comparator =
     { old: FuzzySearchDetails, new: FuzzySearchDetails -> old.hashCode() == new.hashCode() }
 
-class SearchAdapter : BaseAdapter<FuzzySearchDetails> (
+data class SearchItemCallbacks(
+    val onItemClick: (FuzzySearchDetails) -> Unit = {},
+    val onItemLongClick: (FuzzySearchDetails) -> Unit = {}
+)
+
+class SearchAdapter(private val callback: SearchItemCallbacks) : BaseAdapter<FuzzySearchDetails> (
     areItemsSame = comparator,
     areContentsSame = comparator
         ){
@@ -29,7 +34,10 @@ class SearchAdapter : BaseAdapter<FuzzySearchDetails> (
         BaseViewHolder<FuzzySearchDetails>(view) {
 
         override fun bind(data: FuzzySearchDetails, position: Int) {
-            view.address.text = data.address.toString()
+            view.address.text = data.address?.freeFormAddress
+
+            view.setOnClickListener { callback.onItemClick.invoke(data) }
+            view.setOnLongClickListener { callback.onItemLongClick.invoke(data); true }
         }
     }
 }

@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.kutuzov.domain.repo.FavoritesRepository
 import com.kutuzov.mapsearch.BuildConfig
 import com.tomtom.online.sdk.search.OnlineSearchApi
 import com.tomtom.online.sdk.search.SearchException
@@ -11,6 +13,7 @@ import com.tomtom.online.sdk.search.fuzzy.FuzzyOutcome
 import com.tomtom.online.sdk.search.fuzzy.FuzzyOutcomeCallback
 import com.tomtom.online.sdk.search.fuzzy.FuzzySearchDetails
 import com.tomtom.online.sdk.search.fuzzy.FuzzySearchSpecification
+import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.get
 
@@ -22,6 +25,8 @@ class SearchViewModel : ViewModel(), KoinComponent {
 
     val searchResult: LiveData<List<FuzzySearchDetails>>
         get() = _searchResult
+
+    private val repository : FavoritesRepository = get()
 
     private val searchCallback = object : FuzzyOutcomeCallback {
         override fun onError(error: SearchException) {
@@ -37,5 +42,11 @@ class SearchViewModel : ViewModel(), KoinComponent {
     fun search(text: String) {
         val searchSpec = FuzzySearchSpecification.Builder(text).build()
         searchApi.search(searchSpec, searchCallback)
+    }
+
+    fun saveToFavorites(it: FuzzySearchDetails) {
+        viewModelScope.launch {
+            repository.saveToFavorites(it)
+        }
     }
 }
