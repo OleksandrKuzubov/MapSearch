@@ -13,8 +13,8 @@ private val comparator =
     { old: FuzzySearchDetails, new: FuzzySearchDetails -> old.hashCode() == new.hashCode() }
 
 data class SearchItemCallbacks(
-    val onItemClick: (FuzzySearchDetails) -> Unit = {},
-    val onItemLongClick: (FuzzySearchDetails) -> Unit = {}
+    val onSaveClick: (FuzzySearchDetails) -> Unit = {},
+    val showOnMapClick: (FuzzySearchDetails) -> Unit = {}
 )
 
 class SearchAdapter(private val callback: SearchItemCallbacks) : BaseAdapter<FuzzySearchDetails> (
@@ -36,8 +36,8 @@ class SearchAdapter(private val callback: SearchItemCallbacks) : BaseAdapter<Fuz
         override fun bind(data: FuzzySearchDetails, position: Int) {
             view.address.text = data.address?.freeFormAddress
 
-            view.setOnClickListener { callback.onItemClick.invoke(data) }
-            view.setOnLongClickListener { callback.onItemLongClick.invoke(data); true }
+            view.save_button.setOnClickListener { callback.onSaveClick.invoke(data) }
+            view.showOnMap_button.setOnClickListener { callback.showOnMapClick.invoke(data) }
         }
     }
 }
