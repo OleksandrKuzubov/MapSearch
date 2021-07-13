@@ -9,7 +9,7 @@ import com.kutuzov.data.entities.AddressDto
 @Dao
 interface FavoritesDao {
 
-    @Query("SELECT * FROM favorites")
+    @Query("SELECT * FROM favorites ORDER BY id DESC")
     suspend fun getFavorites() : List<AddressDto>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

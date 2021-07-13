@@ -23,11 +23,7 @@ class FavoritesViewModel : ViewModel(), KoinComponent {
     val favorites: LiveData<List<FavoriteAddress>>
         get() = _favorites
 
-    init {
-        getFavorites()
-    }
-
-    private fun getFavorites() {
+    fun getFavorites() {
         viewModelScope.launch {
             _favorites.postValue(repository.getFavorites())
         }

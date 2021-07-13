@@ -23,6 +23,9 @@ allprojects {
         maven {
             url 'https://maven.tomtom.com:8443/nexus/content/repositories/releases/'
         }
+        maven {
+            url  "https://jcenter.bintray.com"
+        }
     }
 }
 

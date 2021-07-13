@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.kutuzov.mapsearch.R
+import io.sulek.ssml.SSMLLinearLayoutManager
 import kotlinx.android.synthetic.main.favorites_fragment.*
 
 class FavoritesFragment : Fragment() {
@@ -39,6 +39,7 @@ class FavoritesFragment : Fragment() {
 
         initAdapter()
         subscribeObservers()
+        viewModel.getFavorites()
     }
 
     private fun subscribeObservers() {
@@ -48,7 +49,7 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        recycler_view.layoutManager = LinearLayoutManager(context)
+        recycler_view.layoutManager = SSMLLinearLayoutManager(requireContext())
         recycler_view.adapter = favoritesAdapter
     }
 }

@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:name=".MapSearchApp"
         android:theme="@style/Theme.MapSearch"
+        tools:replace="android:theme"
         tools:ignore="AllowBackup">
         <activity android:name=".ui.MainActivity">
             <intent-filter>
