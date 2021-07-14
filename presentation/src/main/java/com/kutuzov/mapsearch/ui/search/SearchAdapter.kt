@@ -35,6 +35,8 @@ class SearchAdapter(private val callback: SearchItemCallbacks) : BaseAdapter<Fuz
 
         override fun bind(data: FuzzySearchDetails, position: Int) {
             view.address.text = data.address?.freeFormAddress
+            view.post_code.text = view.context.getString(R.string.item_postalCode, data.address?.postalCode)
+            view.country.text = view.context.getString(R.string.item_country, data.address?.country)
 
             view.save_button.setOnClickListener { callback.onSaveClick.invoke(data) }
             view.showOnMap_button.setOnClickListener { callback.showOnMapClick.invoke(data) }

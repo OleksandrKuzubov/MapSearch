@@ -2,6 +2,7 @@ package com.kutuzov.mapsearch.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -17,6 +18,7 @@ import com.tomtom.online.sdk.search.fuzzy.FuzzySearchDetails
 import io.sulek.ssml.SSMLLinearLayoutManager
 import kotlinx.android.synthetic.main.search_fragment.*
 
+
 class SearchFragment : Fragment() {
 
     companion object {
@@ -28,7 +30,7 @@ class SearchFragment : Fragment() {
 
     private val queryTextListener: SearchView.OnQueryTextListener by lazy {
         DebouncingQueryTextListener(
-            viewLifecycleOwner
+                viewLifecycleOwner
         ) { newText ->
             newText?.let {
                 if (it.length > SEARCH_LIMIT) {
@@ -40,17 +42,17 @@ class SearchFragment : Fragment() {
 
     private val searchSectionItemCallbacks by lazy {
         SearchItemCallbacks(
-            onSaveClick = {
-                viewModel.saveToFavorites(it)
-                Toast.makeText(
-                    context,
-                    "${it.address?.freeFormAddress} saved to favorites",
-                    Toast.LENGTH_SHORT
-                ).show()
-            },
-            showOnMapClick = {
-                showOnMap(it)
-            }
+                onSaveClick = {
+                    viewModel.saveToFavorites(it)
+                    Toast.makeText(
+                            context,
+                            "${it.address?.freeFormAddress} saved to favorites",
+                            Toast.LENGTH_SHORT
+                    ).show()
+                },
+                showOnMapClick = {
+                    showOnMap(it)
+                }
         )
     }
 
@@ -60,9 +62,10 @@ class SearchFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.search_fragment, container, false)
     }
 
@@ -87,7 +90,14 @@ class SearchFragment : Fragment() {
 
     private fun subscribeObservers() {
         viewModel.searchResult.observe(viewLifecycleOwner, Observer {
-            searchAdapter.submitList(it)
+            if(it.error != null) {
+                Toast.makeText(context, it.error.toString(), Toast.LENGTH_SHORT).show()
+            } else {
+                it.content?.let { data ->
+                    empty_view.visibility = if(data.isNullOrEmpty()) View.VISIBLE else View.GONE
+                    searchAdapter.submitList(data)
+                }
+            }
         })
     }
 
@@ -95,5 +105,15 @@ class SearchFragment : Fragment() {
         val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
         savedStateHandle?.set(MainFragment.SEARCH_RESULT, item)
         findNavController().navigateUp()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                viewModel.cleanResult()
+                super.onOptionsItemSelected(item)
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
