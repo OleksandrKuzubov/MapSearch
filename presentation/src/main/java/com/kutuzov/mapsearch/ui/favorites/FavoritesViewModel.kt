@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kutuzov.domain.model.FavoriteAddress
-import com.kutuzov.domain.repo.FavoritesRepository
+import com.kutuzov.domain.repo.SearchRepository
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.get
@@ -16,7 +16,7 @@ class FavoritesViewModel : ViewModel(), KoinComponent {
 
     }
 
-    private var repository: FavoritesRepository = get()
+    private var repository: SearchRepository = get()
 
     private val _favorites: MutableLiveData<List<FavoriteAddress>> = MutableLiveData()
 
