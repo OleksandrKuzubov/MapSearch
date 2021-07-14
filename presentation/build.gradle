@@ -98,6 +98,5 @@ dependencies {
     implementation libraries.room.ktx
     kapt libraries.room.compiler
 
-    implementation 'io.sulek.ssml:simpleswipemenulayout:1.0.4'
-
+    implementation libraries.swipeMenu
 }
