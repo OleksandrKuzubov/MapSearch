@@ -13,5 +13,6 @@ data class FavoriteAddress(
     val postalCode: String?,
     val countryCode: String?,
     val country: String?,
-    val freeFormAddress: String?
+    val freeFormAddress: String?,
+    var isExpanded: Boolean = false
 ) : Parcelable

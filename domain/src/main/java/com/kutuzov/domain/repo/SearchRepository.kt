@@ -14,4 +14,5 @@ interface SearchRepository {
 
     suspend fun search(searchSpec: FuzzySearchSpecification): Result<FuzzyOutcome>
 
+    suspend fun removeAddressById(id: String)
 }

@@ -22,7 +22,7 @@ class FavoritesFragment : Fragment() {
         FavoritesItemCallbacks(
             onItemRemoved = {
                 viewModel.removeAddress(it)
-                Toast.makeText(context, "${it.freeFormAddress} saved to favorites", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "${it.freeFormAddress} item removed", Toast.LENGTH_SHORT).show()
             }
         )
     }

@@ -23,4 +23,8 @@ class SearchRepositoryImpl(private val local: FavoritesDao, private val remote: 
     override suspend fun search(searchSpec: FuzzySearchSpecification): Result<FuzzyOutcome> {
         return remote.search(searchSpec)
     }
+
+    override suspend fun removeAddressById(id: String) {
+        local.removeAddressById(id)
+    }
 }

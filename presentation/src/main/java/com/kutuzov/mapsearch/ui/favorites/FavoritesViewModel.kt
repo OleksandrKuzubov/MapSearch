@@ -13,7 +13,11 @@ import org.koin.core.get
 class FavoritesViewModel : ViewModel(), KoinComponent {
 
     fun removeAddress(it: FavoriteAddress) {
+        viewModelScope.launch {
+            repository.removeAddressById(it.id)
 
+            getFavorites()
+        }
     }
 
     private var repository: SearchRepository = get()

@@ -1,9 +1,6 @@
 package com.kutuzov.data.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.kutuzov.data.entities.AddressDto
 
 @Dao
@@ -14,4 +11,7 @@ interface FavoritesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(entity: AddressDto)
+
+    @Query("DELETE FROM favorites WHERE id = :id")
+    suspend fun removeAddressById(id: String)
 }
