@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.kutuzov.mapsearch.BuildConfig
 import com.kutuzov.mapsearch.R
+import com.tomtom.online.sdk.common.location.BoundingBox
 import com.tomtom.online.sdk.location.LocationUpdateListener
 import com.tomtom.online.sdk.map.*
 import com.tomtom.online.sdk.search.fuzzy.FuzzySearchDetails
@@ -21,8 +22,7 @@ class MainFragment : Fragment(), OnMapReadyCallback, LocationUpdateListener {
         const val SEARCH_RESULT = "SEARCH_RESULT"
     }
 
-    private var markerBuilder: MarkerBuilder? = null
-    private var cameraPosition: CameraPosition? = null
+    private var markers: HashMap<CameraPosition, MarkerBuilder> = hashMapOf()
     private val viewModel: MainViewModel by navGraphViewModels(R.id.map_search_nav_graph)
 
     override fun onCreateView(
@@ -36,62 +36,78 @@ class MainFragment : Fragment(), OnMapReadyCallback, LocationUpdateListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        initMap(savedInstanceState)
+        initMap()
+        initOnFragmentResult()
+    }
 
+    private fun initOnFragmentResult() {
         val currentBackStackEntry = findNavController().currentBackStackEntry
         val savedStateHandle = currentBackStackEntry?.savedStateHandle
 
-        savedStateHandle?.getLiveData<FuzzySearchDetails>(SEARCH_RESULT)
+        savedStateHandle?.getLiveData<List<FuzzySearchDetails>>(SEARCH_RESULT)
             ?.observe(currentBackStackEntry, Observer { result ->
-                markerBuilder = MarkerBuilder(result.position)
-                    .icon(Icon.Factory.fromResources(requireContext(), R.drawable.ic_favourites))
-                    .markerBalloon(SimpleMarkerBalloon(result.info))
-                    .tag("more information in tag").iconAnchor(MarkerAnchor.Bottom)
-                    .decal(true) //By default is false
-
-                cameraPosition = CameraPosition.builder()
-                    .focusPosition(result.position)
-                    .zoom(10.0)
-                    .build()
+                result?.forEach { item ->
+                    markers[CameraPosition.builder()
+                        .focusPosition(item.position)
+                        .zoom(10.0)
+                        .build()] = MarkerBuilder(item.position)
+                        .icon(
+                            Icon.Factory.fromResources(
+                                requireContext(),
+                                R.drawable.ic_favourites
+                            )
+                        )
+                        .markerBalloon(SimpleMarkerBalloon(item.address?.freeFormAddress))
+                        .tag("more information in tag").iconAnchor(MarkerAnchor.Bottom)
+                        .decal(true) //By default is false
+                }
             })
     }
 
     private lateinit var tomtomMap: TomtomMap
     private lateinit var mapView: MapView
 
-    private fun initMap(savedInstanceState: Bundle?) {
-        if (savedInstanceState == null) {
-            val keysMap = mapOf(
-                ApiKeyType.MAPS_API_KEY to BuildConfig.API_KEY
-            )
+    private fun initMap() {
+        val keysMap = mapOf(
+            ApiKeyType.MAPS_API_KEY to BuildConfig.API_KEY
+        )
 
-            val properties = MapProperties.Builder()
-                .keys(keysMap)
-                .build()
+        val properties = MapProperties.Builder()
+            .keys(keysMap)
+            .build()
 
-            val mapFragment = MapFragment.newInstance(properties)
-            mapView = MapView(requireContext())
-            childFragmentManager.beginTransaction()
-                .replace(R.id.container, mapFragment)
-                .commitNow()
+        val mapFragment = MapFragment.newInstance(properties)
+        mapView = MapView(requireContext())
+        childFragmentManager.beginTransaction()
+            .replace(R.id.container, mapFragment)
+            .commitNow()
 
-            mapFragment.getAsyncMap(this)
-        }
+        mapFragment.getAsyncMap(this)
     }
 
 
     override fun onMapReady(tomtomMap: TomtomMap) {
         this.tomtomMap = tomtomMap
-        if (markerBuilder != null) {
-            tomtomMap.removeMarkers()
-            tomtomMap.addMarker(markerBuilder)
-            cameraPosition?.let { tomtomMap.centerOn(it) }
-            markerBuilder = null
-            cameraPosition = null
+        tomtomMap.removeMarkers()
+        if (markers.isNotEmpty()) {
+            showMarkers(tomtomMap)
         } else {
             tomtomMap.addLocationUpdateListener(this)
             tomtomMap.isMyLocationEnabled = true
         }
+    }
+
+    private fun showMarkers(tomtomMap: TomtomMap) {
+        markers.forEach {
+            tomtomMap.addMarker(it.value)
+        }
+
+        if (markers.size == 1) {
+            tomtomMap.centerOn(markers.keys.first())
+        } else {
+            tomtomMap.zoomToAllMarkers()
+        }
+        markers.clear()
     }
 
     override fun onRequestPermissionsResult(

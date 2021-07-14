@@ -5,4 +5,5 @@
     <string name="empty_result">Empty result</string>
     <string name="item_country"><b>Country:</b> %s</string>
     <string name="item_postalCode"><b>Postal code:</b> %s</string>
+    <string name="show_on_map">Show on Map</string>
 </resources>
