@@ -43,6 +43,11 @@ android {
             enable true
         }
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+        unitTests.includeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -75,6 +80,14 @@ dependencies {
     testImplementation testLibraries.coroutinesCore
     testImplementation testLibraries.coroutinesTest
     testImplementation testLibraries.androidx.archTesting
+    testImplementation testLibraries.junit.api
+    testImplementation testLibraries.junit.engine
+    testImplementation testLibraries.mockk.core
+    testImplementation testLibraries.mockk.android
+    testImplementation testLibraries.mockito.core
+    testImplementation testLibraries.koin
+
+    androidTestImplementation testLibraries.androidx.junitExt
 
     implementation libraries.room.runtime
     implementation libraries.room.ktx

@@ -136,5 +136,7 @@ ext {
                     core   : "io.mockk:mockk:${versions.mockkVersion}",
                     android: "io.mockk:mockk-android:${versions.mockkVersion}",
             ],
+
+            koin                   : "org.koin:koin-test:${versions.koinVersion}"
     ]
 }
