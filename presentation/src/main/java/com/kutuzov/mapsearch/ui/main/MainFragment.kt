@@ -68,6 +68,7 @@ class MainFragment : Fragment(), OnMapReadyCallback, LocationUpdateListener {
     private lateinit var mapView: MapView
 
     private fun initMap() {
+
         val keysMap = mapOf(
             ApiKeyType.MAPS_API_KEY to BuildConfig.API_KEY
         )

@@ -22,7 +22,7 @@ class SearchFragment : Fragment() {
         private const val SEARCH_LIMIT = 2
     }
 
-    private lateinit var showOnMapView: MenuItem
+    private var showOnMapView: MenuItem? = null
 
     private val viewModel: SearchViewModel by navGraphViewModels(R.id.map_search_nav_graph)
     private val searchAdapter: SearchAdapter by lazy { SearchAdapter(searchSectionItemCallbacks) }
@@ -94,7 +94,7 @@ class SearchFragment : Fragment() {
                 } else {
                     data.content?.let { content ->
                         empty_view.visibility = if (content.isNullOrEmpty()) View.VISIBLE else View.GONE
-                        showOnMapView.isVisible = !content.isNullOrEmpty()
+                        showOnMapView?.isVisible = !content.isNullOrEmpty()
                         searchAdapter.submitList(content)
                     }
                 }

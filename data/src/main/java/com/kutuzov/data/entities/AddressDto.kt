@@ -7,33 +7,33 @@ import com.tomtom.online.sdk.search.fuzzy.FuzzySearchDetails
 
 @Entity(tableName = "favorites")
 data class AddressDto(
-        @PrimaryKey
-        val id: String,
-        val streetNumber: String?,
-        val street: String?,
-        val streetName: String?,
-        val municipality: String?,
-        val postalCode: String?,
-        val countryCode: String?,
-        val country: String?,
-        val freeFormAddress: String?
+    @PrimaryKey
+    val id: String,
+    val streetNumber: String?,
+    val street: String?,
+    val streetName: String?,
+    val municipality: String?,
+    val postalCode: String?,
+    val countryCode: String?,
+    val country: String?,
+    val freeFormAddress: String?
 ) {
     companion object {
         fun from(item: FuzzySearchDetails) =
-                AddressDto(
-                        item.id,
-                        item.address?.streetNumber,
-                        item.address?.street,
-                        item.address?.streetName,
-                        item.address?.municipality,
-                        item.address?.postalCode,
-                        item.address?.countryCode,
-                        item.address?.country,
-                        item.address?.freeFormAddress
-                )
+            AddressDto(
+                item.id,
+                item.address?.streetNumber,
+                item.address?.street,
+                item.address?.streetName,
+                item.address?.municipality,
+                item.address?.postalCode,
+                item.address?.countryCode,
+                item.address?.country,
+                item.address?.freeFormAddress
+            )
     }
 
-    fun toFavoriteAddress()  =
+    fun toFavoriteAddress() =
         FavoriteAddress(
             id,
             streetNumber,
