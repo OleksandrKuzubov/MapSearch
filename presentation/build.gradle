@@ -88,6 +88,8 @@ dependencies {
     testImplementation testLibraries.koin
 
     androidTestImplementation testLibraries.androidx.junitExt
+    androidTestImplementation testLibraries.androidx.espresso
+    androidTestImplementation testLibraries.androidx.espressoContrib
 
     implementation libraries.room.runtime
     implementation libraries.room.ktx
