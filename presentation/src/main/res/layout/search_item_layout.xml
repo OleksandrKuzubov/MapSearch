@@ -15,7 +15,7 @@
         app:menuSide="Right">
 
         <LinearLayout
-            android:id="@+id/backgroundContainer"
+            android:id="@+id/search_backgroundContainer"
             android:layout_width="160dp"
             android:layout_height="0dp"
             android:background="@color/item_swipe_bg"
@@ -44,7 +44,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/foregroundContainer"
+            android:id="@+id/search_foregroundContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/item_swipe_fg"
