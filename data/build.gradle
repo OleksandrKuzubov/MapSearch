@@ -35,12 +35,6 @@ android {
 dependencies {
     implementation project(":domain")
 
-    implementation libraries.retrofit.core
-    implementation libraries.retrofit.converterGson
-    implementation libraries.retrofit.coroutinesAdapter
-
-    implementation libraries.okHttp.core
-
     implementation libraries.google.gson
     implementation libraries.google.material
 
