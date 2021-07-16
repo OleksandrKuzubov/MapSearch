@@ -2,7 +2,6 @@ package com.kutuzov.mapsearch.ui.main
 
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -10,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.kutuzov.mapsearch.BuildConfig
 import com.kutuzov.mapsearch.R
-import com.tomtom.online.sdk.common.location.BoundingBox
 import com.tomtom.online.sdk.location.LocationUpdateListener
 import com.tomtom.online.sdk.map.*
 import com.tomtom.online.sdk.search.fuzzy.FuzzySearchDetails

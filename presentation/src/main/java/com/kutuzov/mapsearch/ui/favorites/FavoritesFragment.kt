@@ -44,6 +44,7 @@ class FavoritesFragment : Fragment() {
 
     private fun subscribeObservers() {
         viewModel.favorites.observe(viewLifecycleOwner, Observer {
+            empty_view.visibility = if(it.isNullOrEmpty()) View.VISIBLE else View.GONE
             favoritesAdapter.submitList(it)
         })
     }
