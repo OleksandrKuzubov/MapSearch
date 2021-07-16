@@ -1,0 +1,99 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.kutuzov.mapsearch"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField "String", "API_KEY", "\"MAhsJKGvYXB3Org5v3Z2JOJlg6lP47cZ\""
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    splits {
+        abi {
+            enable true
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+        unitTests.includeAndroidResources = true
+    }
+}
+
+dependencies {
+
+    implementation project(":domain")
+    implementation project(":data")
+
+    implementation libraries.picasso
+    implementation libraries.kotlin
+
+    implementation libraries.tomtom.mapsSdk
+    implementation libraries.tomtom.searchSdk
+
+    implementation libraries.google.material
+
+    implementation libraries.koin.android
+    implementation libraries.koin.androidxScope
+    implementation libraries.koin.androidxViewModel
+
+    implementation libraries.androidx.process
+    implementation libraries.androidx.fragment
+    implementation libraries.androidx.navigationCore
+    implementation libraries.androidx.navigationUIExt
+    implementation libraries.androidx.constraintLayout
+    implementation libraries.androidx.recyclerView
+    implementation libraries.androidx.multidex
+
+    debugImplementation libraries.leakCanary
+
+    testImplementation testLibraries.coroutinesCore
+    testImplementation testLibraries.coroutinesTest
+    testImplementation testLibraries.androidx.archTesting
+    testImplementation testLibraries.junit.api
+    testImplementation testLibraries.junit.engine
+    testImplementation testLibraries.mockk.core
+    testImplementation testLibraries.mockk.android
+    testImplementation testLibraries.mockito.core
+    testImplementation testLibraries.koin
+
+    androidTestImplementation testLibraries.androidx.junitExt
+    androidTestImplementation testLibraries.androidx.espresso
+    androidTestImplementation testLibraries.androidx.espressoContrib
+
+    implementation libraries.room.runtime
+    implementation libraries.room.ktx
+    kapt libraries.room.compiler
+
+    implementation libraries.swipeMenu
+}

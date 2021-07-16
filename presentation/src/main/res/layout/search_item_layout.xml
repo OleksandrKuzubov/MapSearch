@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/common_padding_small_4dp"
+    android:layout_marginVertical="@dimen/common_padding_medium_8dp"
+    app:cardCornerRadius="@dimen/common_padding_sm_6dp">
+
+    <io.sulek.ssml.SimpleSwipeMenuLayout
+        android:id="@+id/swipeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dynamicMenuWidth="false"
+        app:menuSide="Right">
+
+        <LinearLayout
+            android:id="@+id/search_backgroundContainer"
+            android:layout_width="160dp"
+            android:layout_height="0dp"
+            android:background="@color/item_swipe_bg"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/save_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:background="@color/colorPrimary"
+                android:src="@android:drawable/ic_menu_save"
+                android:contentDescription="@null"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/showOnMap_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:background="@color/colorPrimaryDark"
+                android:src="@android:drawable/ic_menu_mapmode"
+                android:contentDescription="@null"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/search_foregroundContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/item_swipe_fg"
+            android:orientation="vertical"
+            android:padding="@dimen/common_padding_small_4dp">
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/common_padding_large_12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:lines="1"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/common_padding_large_12dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/post_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/common_padding_large_12dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </io.sulek.ssml.SimpleSwipeMenuLayout>
+
+</androidx.cardview.widget.CardView>
