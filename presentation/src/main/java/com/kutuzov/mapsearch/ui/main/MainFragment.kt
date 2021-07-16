@@ -23,6 +23,11 @@ class MainFragment : Fragment(), OnMapReadyCallback, LocationUpdateListener {
     private var markers: HashMap<CameraPosition, MarkerBuilder> = hashMapOf()
     private val viewModel: MainViewModel by navGraphViewModels(R.id.map_search_nav_graph)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initOnFragmentResult()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +40,6 @@ class MainFragment : Fragment(), OnMapReadyCallback, LocationUpdateListener {
         super.onActivityCreated(savedInstanceState)
 
         initMap()
-        initOnFragmentResult()
     }
 
     private fun initOnFragmentResult() {
